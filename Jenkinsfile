@@ -31,10 +31,10 @@ def git_branch() {
 
 def DOCKER_REGISTRY = "nexus.lm-edu.flant.ru"
 def DOCKER_REGISTRY_CREDENTIALS = "DOCKER_REGISTRY"
-def HV = "hv6"
-def kubecfg_file_name = "hv-6-kubecfg"
+def HV = "hv5"
+def kubecfg_file_name = "hv-5-kubecfg"
 
-node ('mfominov') {
+node ('asakura') {
     timestamps {
         deleteDir()
         stage('repo checkout') {
