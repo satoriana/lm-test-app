@@ -1,0 +1,22 @@
+project: front-dev
+configVersion: 1
+---
+artifact: generator
+from: php:7.2
+git:
+- add: /src
+  to: /app
+ansible:
+  install:
+  - name: "Generate html"
+    shell: |
+      set -e
+      php /app/generator.php > /app/html
+---
+image: nexus.lm-edu.flant.ru/hv-5/frontend
+from: nginx
+import:
+- artifact: generator
+  after: setup
+  add: /app/html
+  to: /usr/local/nginx/html/index.html

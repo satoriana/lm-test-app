@@ -1,0 +1,20 @@
+apiVersion: apps/v1beta1
+kind: Deployment
+metadata:
+  name: {{ .Chart.Name }}-frontend
+spec:
+  selector:
+    matchLabels:
+      app: lm-test-app
+  replicas: {{ .Values.replicas }}
+  template:
+    metadata:
+     labels:
+       app: lm-test-app
+    spec:
+      containers:
+        - name: front
+{{ tuple "nexus.lm-edu.flant.ru/hv-5/frontend" . | include "werf_container_image" | indent 10 }}
+      imagePullSecrets:
+      - name: registry-creds
+ 
